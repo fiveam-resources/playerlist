@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import PlayerList from "./components/PlayerList";
 
-const mockPlayers = Array.from({ length: 128 }, (_, index) => ({
+const mockPlayers = Array.from({ length: 32 }, (_, index) => ({
   id: index,
   name: `Player ${index + 1}`,
   tag: "tag",
