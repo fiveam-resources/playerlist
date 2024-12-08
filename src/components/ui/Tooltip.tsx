@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { cn } from "../../lib/utils";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 const Tooltip = TooltipPrimitive.Root;
@@ -8,12 +9,15 @@ const TooltipTrigger = TooltipPrimitive.Trigger;
 const TooltipContent = React.forwardRef<
   React.ComponentRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ sideOffset = 8, ...props }, ref) => (
+>(({ className, sideOffset = 8, ...props }, ref) => (
   <TooltipPrimitive.Portal>
     <TooltipPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
-      className="z-50 overflow-hidden rounded-xs bg-emerald-600 px-2 py-1.5 font-semibold text-white text-xs"
+      className={cn(
+        "z-50 overflow-hidden rounded-xs bg-zinc-800 px-2 py-1.5 text-xs font-semibold text-white",
+        className,
+      )}
       {...props}
     />
   </TooltipPrimitive.Portal>

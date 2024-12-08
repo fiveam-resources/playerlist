@@ -1,10 +1,4 @@
-import { FaWifi } from "react-icons/fa";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/Tooltip";
+import PlayerPing from "./PlayerPing";
 
 export interface Player {
   id: number;
@@ -12,23 +6,6 @@ export interface Player {
   tag: string;
   ping: number;
 }
-
-const Ping = ({ ping }: { ping: number }) => {
-  return (
-    <div className="mt-1 flex">
-      <TooltipProvider delayDuration={100}>
-        <Tooltip>
-          <TooltipTrigger>
-            <FaWifi className="rotate-45 text-emerald-600" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>{ping} ms</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    </div>
-  );
-};
 
 const PlayerCard = ({ id, name, ping }: Player) => {
   return (
@@ -40,7 +17,7 @@ const PlayerCard = ({ id, name, ping }: Player) => {
         <span className="text-zinc-300">{name}</span>
       </div>
 
-      <Ping ping={ping} />
+      <PlayerPing ping={ping} />
     </div>
   );
 };

@@ -21,7 +21,9 @@ const PlayerList = ({ players }: PlayerListProps) => {
         <span>
           {players.length} {players.length === 1 ? "Player" : "Players"} Online
         </span>
-        <span>5AM Resources</span>
+
+        {/* Please don't remove this, it's a way to support the this project and future once */}
+        <span className="text-zinc-900">5AM Resources</span>
       </footer>
     </div>
   );

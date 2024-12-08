@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import PlayerList from "./components/PlayerList";
 
 const mockPlayers = Array.from({ length: 128 }, (_, index) => ({
@@ -8,9 +10,36 @@ const mockPlayers = Array.from({ length: 128 }, (_, index) => ({
 }));
 
 const App = () => {
+  const [open, setOpen] = useState(false);
+  const [animateOpen, setAnimateOpen] = useState(false);
+  const duration = 0.3;
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setAnimateOpen((prevOpen) => !prevOpen);
+        setTimeout(() => setOpen((prevOpen) => !prevOpen), duration * 1000);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  if (!open) return null;
+
   return (
-    <div className="font-poppins flex h-screen justify-center overflow-hidden bg-zinc-950/70 px-2 text-white select-none">
-      <PlayerList players={mockPlayers} />
+    <div className="font-poppins flex h-screen justify-center overflow-hidden px-2 text-white select-none">
+      <motion.div
+        className="flex h-fit w-full justify-center"
+        initial={{ y: "-100%" }}
+        animate={{
+          y: animateOpen ? 0 : "-100%",
+          transition: { duration: duration, ease: "circIn" },
+        }}
+      >
+        <PlayerList players={mockPlayers} />
+      </motion.div>
     </div>
   );
 };
