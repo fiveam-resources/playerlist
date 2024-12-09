@@ -1,11 +1,5 @@
+import { Player } from "../lib/types";
 import PlayerPing from "./PlayerPing";
-
-export interface Player {
-  id: number;
-  name: string;
-  tag: string;
-  ping: number;
-}
 
 const PlayerCard = ({ id, name, ping }: Player) => {
   return (

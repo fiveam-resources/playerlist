@@ -1,12 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-@import "tailwindcss";
 
-@theme {
-  --font-poppins: "Poppins", "sans-serif";
-  --color-background: var(--color-zinc-950);
-  --color-background-muted: var(--color-zinc-800);
-  --color-primary: #c2caea;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .scroller {
   scrollbar-color: var(--color-background-muted) var(--color-background);

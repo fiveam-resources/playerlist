@@ -1,13 +1,10 @@
 import { useState } from "react";
-import PlayerCard, { Player } from "./PlayerCard";
+import PlayerCard from "./PlayerCard";
 import SearchInput from "./ui/SearchInput";
 import { filterPlayers } from "../lib/utils";
+import { Player } from "../lib/types";
 
-interface PlayerListProps {
-  players: Player[];
-}
-
-const PlayerList = ({ players }: PlayerListProps) => {
+const PlayerList = ({ players }: { players: Player[] }) => {
   const [filteredPlayers, setFilteredPlayers] = useState(players);
 
   const handleSearch = (query: string) => {
@@ -26,7 +23,7 @@ const PlayerList = ({ players }: PlayerListProps) => {
         ))}
       </div>
 
-      <footer className="flex h-10 shrink-0 items-center justify-between border-t border-white/5 pr-4 pl-2 text-xs text-zinc-400">
+      <footer className="flex h-10 shrink-0 items-center justify-between border-t border-white/5 pl-2 pr-4 text-xs text-zinc-400">
         <div className="flex items-center space-x-2">
           <SearchInput onChange={handleSearch} />
           <span>
