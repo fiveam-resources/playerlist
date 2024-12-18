@@ -11,3 +11,8 @@ export function filterPlayers(players: Player[], query: string) {
     player.name.toLowerCase().includes(query.toLowerCase()),
   );
 }
+
+export function fetchNui(_arg0: string) {
+  console.log(_arg0);
+  throw new Error("Function not implemented.");
+}

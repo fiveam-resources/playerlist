@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 .scroller {
+  color-scheme: light dark;
   scrollbar-color: var(--color-background-muted) var(--color-background);
   scrollbar-width: thin;
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import PlayerList from "./components/PlayerList";
 import { useEventListener } from "usehooks-ts";
+import { fetchNui } from "./lib/utils";
 
 const mockPlayers = Array.from({ length: 120 }, (_, index) => ({
   id: index,
@@ -54,7 +55,4 @@ const App = () => {
 
 export default App;
 
-function fetchNui(_arg0: string) {
-  console.log(_arg0);
-  throw new Error("Function not implemented.");
-}
+// TODO: Events, jobs, ranks
