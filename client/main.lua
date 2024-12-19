@@ -2,10 +2,7 @@ local function openUI(players)
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = 'open',
-        data = {
-            display = true,
-            players = players
-        }
+        data = { players = players }
     })
 end
 
@@ -14,15 +11,19 @@ local function closeUI()
     SendNUIMessage({ action = 'close' })
 end
 
-RegisterCommand('scoreboard', function()
-    TriggerServerEvent('scoreboard:server:openScoreboard')
+-- Commands
+
+RegisterCommand('playerlist', function()
+    TriggerServerEvent('playerlist:server:open')
 end, false)
 
-RegisterKeyMapping('scoreboard', 'Open Scoreboard', 'keyboard', 'F10')
+RegisterKeyMapping('playerlist', 'Open Playerlist', 'keyboard', Config.OpenKey)
 
-RegisterNetEvent('scoreboard:client:openScoreboard', function(players)
-    openUI(players)
-end)
+-- Events
+
+RegisterNetEvent('playerlist:client:open', openUI)
+
+-- NUI Callbacks
 
 RegisterNUICallback('close', function(_, cb)
     cb('ok')

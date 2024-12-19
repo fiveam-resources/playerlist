@@ -1,12 +1,4 @@
-for _, playerId in ipairs(GetPlayers()) do
-    local name = GetPlayerName(playerId)
-    print(('Player %s with id %i is in the server'):format(name, playerId))
-    -- ('%s'):format('text') is same as string.format('%s', 'text)
-end
-
-
-RegisterNetEvent('scoreboard:server:openScoreboard', function()
-    local thisPlayerId = source
+local function getPlayers()
     local players = {}
 
     for _, playerId in ipairs(GetPlayers()) do
@@ -17,5 +9,12 @@ RegisterNetEvent('scoreboard:server:openScoreboard', function()
         })
     end
 
-    TriggerClientEvent('scoreboard:client:openScoreboard', thisPlayerId, players)
+    return players
+end
+
+RegisterNetEvent('playerlist:server:open', function()
+    local playerId = source
+    local players = getPlayers()
+
+    TriggerClientEvent('playerlist:client:open', playerId, players)
 end)
