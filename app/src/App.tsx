@@ -4,16 +4,16 @@ import PlayerList from "./components/PlayerList";
 import { useEventListener } from "usehooks-ts";
 import { fetchNui } from "./lib/utils";
 
-const mockPlayers = Array.from({ length: 120 }, (_, index) => ({
-  id: index,
-  name: `Player ${index + 1}`,
-  ping: Math.floor(Math.random() * 100),
-}));
+// const mockPlayers = Array.from({ length: 120 }, (_, index) => ({
+//   id: index,
+//   name: `Player ${index + 1}`,
+//   ping: Math.floor(Math.random() * 100),
+// }));
 
 const App = () => {
-  const [players, setPlayers] = useState(mockPlayers);
-  const [open, setOpen] = useState(true);
-  const [animateOpen, setAnimateOpen] = useState(true);
+  const [players, setPlayers] = useState();
+  const [open, setOpen] = useState(false);
+  const [animateOpen, setAnimateOpen] = useState(false);
   const duration = 0.3;
 
   useEventListener("keydown", ({ code }: KeyboardEvent) => {

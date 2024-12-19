@@ -15,4 +15,11 @@ server_scripts {
     'server/main.lua',
 }
 
-ui_page 'http://localhost:5173/'
+files {
+    'app/dist/index.html',
+    'app/dist/assets/*.js',
+    'app/dist/assets/*.css',
+}
+
+-- ui_page 'http://localhost:5173/'
+ui_page 'app/dist/index.html'
