@@ -12,33 +12,26 @@ const SearchInput = ({ onChange }: SearchInputProps) => {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleFocusBlur = (isFocus: boolean) => {
-    if (isFocus) {
-      if (isExpanded) {
-        inputRef.current?.blur();
-      } else {
-        inputRef.current?.focus();
-      }
-    }
-
-    if (isExpanded && query.length > 1) return;
-    setIsExpanded(isFocus ? !isExpanded : false);
-  };
-
-  const handleFocus = () => {
-    handleFocusBlur(true);
-  };
-
-  const handleBlur = () => {
-    handleFocusBlur(false);
-  };
-
-  const handleOnChange = (query: string) => {
+  const handleChange = (query: string) => {
     setQuery(query);
 
     if (onChange) {
       onChange(query);
     }
+  };
+
+  const handleFocusBlur = (isFocus: boolean) => {
+    if (isExpanded && query.length >= 1) return;
+    setIsExpanded(isFocus ? !isExpanded : false);
+  };
+
+  const handleFocus = () => {
+    inputRef.current?.focus();
+    handleFocusBlur(true);
+  };
+
+  const handleBlur = () => {
+    handleFocusBlur(false);
   };
 
   return (
@@ -54,7 +47,7 @@ const SearchInput = ({ onChange }: SearchInputProps) => {
         type="text"
         placeholder="Search..."
         value={query}
-        onChange={(e) => handleOnChange(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
         onBlur={handleBlur}
         className="bg-transparent outline-none"
         initial={{ width: 0, paddingLeft: 0 }}

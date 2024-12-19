@@ -4,7 +4,7 @@ import SearchInput from "./ui/SearchInput";
 import { filterPlayers } from "../lib/utils";
 import { Player } from "../lib/types";
 
-const PlayerList = ({ players }: { players: Player[] }) => {
+const PlayerList = ({ players = [] }: { players?: Player[] }) => {
   const [filteredPlayers, setFilteredPlayers] = useState(players);
 
   const handleSearch = (query: string) => {
@@ -12,7 +12,7 @@ const PlayerList = ({ players }: { players: Player[] }) => {
   };
 
   return (
-    <div className="mt-2 flex h-screen max-h-[70vh] w-full max-w-7xl flex-col overflow-hidden rounded-sm bg-zinc-950/95">
+    <div className="mt-2 flex h-screen max-h-[70vh] w-full max-w-7xl flex-col overflow-hidden rounded-md bg-zinc-950">
       <header className="flex h-12 shrink-0 items-center justify-between border-b border-white/5 px-4">
         <h1 className="font-medium">Sever Name</h1>
       </header>
@@ -27,8 +27,8 @@ const PlayerList = ({ players }: { players: Player[] }) => {
         <div className="flex items-center space-x-2">
           <SearchInput onChange={handleSearch} />
           <span>
-            {players.length} {players.length === 1 ? "Player" : "Players"}{" "}
-            Online
+            {players.length} {players.length === 1 ? "Player" : "Players"}
+            {" Online"}
           </span>
         </div>
 

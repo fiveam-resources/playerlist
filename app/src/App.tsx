@@ -12,9 +12,13 @@ const mockPlayers = Array.from({ length: 120 }, (_, index) => ({
 
 const App = () => {
   const [players, setPlayers] = useState(mockPlayers);
-  const [open, setOpen] = useState(false);
-  const [animateOpen, setAnimateOpen] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [animateOpen, setAnimateOpen] = useState(true);
   const duration = 0.3;
+
+  useEventListener("keydown", ({ code }: KeyboardEvent) => {
+    if (["Escape"].includes(code)) fetchNui("close");
+  });
 
   useEventListener("message", (event) => {
     const { action, data } = event.data;
@@ -26,13 +30,11 @@ const App = () => {
     }
 
     if (action === "close") {
-      setAnimateOpen((prevOpen) => !prevOpen);
-      setTimeout(() => setOpen((prevOpen) => !prevOpen), duration * 1000);
+      setAnimateOpen(false);
+      setTimeout(() => {
+        setOpen(false);
+      }, duration * 1000);
     }
-  });
-
-  useEventListener("keydown", ({ code }: KeyboardEvent) => {
-    if (["Escape"].includes(code)) fetchNui("close");
   });
 
   if (!open) return null;
