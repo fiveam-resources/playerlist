@@ -1,5 +1,5 @@
 Config = {}
 
-Config.ServerName = 'Server Name'
+Config.ServerName = '5AM RP'
 
-Config.OpenKey = 'F10'
+Config.Key = 'F10'

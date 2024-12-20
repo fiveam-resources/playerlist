@@ -26,6 +26,7 @@ const PlayerPing = ({ ping }: { ping: number }) => {
               })}
             />
           </TooltipTrigger>
+          
           <TooltipContent
             className={cn({
               "bg-red-800": connectionStatus === "bad",

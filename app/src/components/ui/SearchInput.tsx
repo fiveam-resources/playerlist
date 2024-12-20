@@ -20,18 +20,14 @@ const SearchInput = ({ onChange }: SearchInputProps) => {
     }
   };
 
-  const handleFocusBlur = (isFocus: boolean) => {
-    if (isExpanded && query.length >= 1) return;
-    setIsExpanded(isFocus ? !isExpanded : false);
-  };
-
   const handleFocus = () => {
-    inputRef.current?.focus();
-    handleFocusBlur(true);
+    if (isExpanded && query.length >= 1) return;
+    setIsExpanded(!isExpanded);
   };
 
   const handleBlur = () => {
-    handleFocusBlur(false);
+    if (isExpanded && query.length >= 1) return;
+    setIsExpanded(false);
   };
 
   return (

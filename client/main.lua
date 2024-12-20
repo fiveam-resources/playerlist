@@ -2,7 +2,7 @@ local function openUI(players)
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = 'open',
-        data = { players = players }
+        data = { players = players, key = Config.Key, serverName = Config.ServerName }
     })
 end
 
@@ -17,7 +17,7 @@ RegisterCommand('playerlist', function()
     TriggerServerEvent('playerlist:server:open')
 end, false)
 
-RegisterKeyMapping('playerlist', 'Open Playerlist', 'keyboard', Config.OpenKey)
+RegisterKeyMapping('playerlist', 'Open Playerlist', 'keyboard', Config.Key)
 
 -- Events
 

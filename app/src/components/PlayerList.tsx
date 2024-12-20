@@ -4,7 +4,13 @@ import SearchInput from "./ui/SearchInput";
 import { filterPlayers } from "../lib/utils";
 import { Player } from "../lib/types";
 
-const PlayerList = ({ players = [] }: { players?: Player[] }) => {
+const PlayerList = ({
+  players = [],
+  serverName,
+}: {
+  players?: Player[];
+  serverName?: string;
+}) => {
   const [filteredPlayers, setFilteredPlayers] = useState(players);
 
   const handleSearch = (query: string) => {
@@ -12,9 +18,9 @@ const PlayerList = ({ players = [] }: { players?: Player[] }) => {
   };
 
   return (
-    <div className="mt-2 flex h-screen max-h-[70vh] w-full max-w-7xl flex-col overflow-hidden rounded-md bg-zinc-950">
+    <div className="mt-2 flex h-screen max-h-[70vh] w-full max-w-7xl flex-col overflow-hidden rounded-md bg-zinc-950/90">
       <header className="flex h-12 shrink-0 items-center justify-between border-b border-white/5 px-4">
-        <h1 className="font-medium">Sever Name</h1>
+        <h1 className="font-medium">{serverName || "Server Name"}</h1>
       </header>
 
       <div className="scroller grid h-full grid-cols-1 place-content-start gap-1 overflow-x-auto p-2 sm:grid-cols-2 lg:grid-cols-4">

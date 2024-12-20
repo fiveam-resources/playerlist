@@ -10,15 +10,14 @@ import { fetchNui } from "./lib/utils";
 //   ping: Math.floor(Math.random() * 100),
 // }));
 
+const ANIMATION_DURATION = 0.3;
+
 const App = () => {
-  const [players, setPlayers] = useState();
   const [open, setOpen] = useState(false);
   const [animateOpen, setAnimateOpen] = useState(false);
-  const duration = 0.3;
-
-  useEventListener("keydown", ({ code }: KeyboardEvent) => {
-    if (["Escape"].includes(code)) fetchNui("close");
-  });
+  const [players, setPlayers] = useState();
+  const [closeKey, setCloseKey] = useState();
+  const [serverName, setServerName] = useState();
 
   useEventListener("message", (event) => {
     const { action, data } = event.data;
@@ -27,14 +26,20 @@ const App = () => {
       setPlayers(data.players);
       setAnimateOpen(true);
       setOpen(true);
+      setCloseKey(data.key);
+      setServerName(data.serverName);
     }
 
     if (action === "close") {
       setAnimateOpen(false);
       setTimeout(() => {
         setOpen(false);
-      }, duration * 1000);
+      }, ANIMATION_DURATION * 1000);
     }
+  });
+
+  useEventListener("keydown", ({ code }: KeyboardEvent) => {
+    if (["Escape", closeKey].includes(code)) fetchNui("close");
   });
 
   if (!open) return null;
@@ -46,15 +51,13 @@ const App = () => {
         initial={{ y: "-100%" }}
         animate={{
           y: animateOpen ? 0 : "-100%",
-          transition: { duration: duration, ease: "circIn" },
+          transition: { duration: ANIMATION_DURATION, ease: "circIn" },
         }}
       >
-        <PlayerList players={players} />
+        <PlayerList players={players} serverName={serverName} />
       </motion.div>
     </div>
   );
 };
 
 export default App;
-
-// TODO: Events, jobs, ranks
