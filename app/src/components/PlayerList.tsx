@@ -18,12 +18,12 @@ const PlayerList = ({
   };
 
   return (
-    <div className="mt-2 flex h-screen max-h-[70vh] w-full max-w-7xl flex-col overflow-hidden rounded-md bg-zinc-950/90">
+    <div className="bg-background/85 mt-2 flex h-fit max-h-[71vh] min-h-fit w-full max-w-7xl flex-col overflow-hidden rounded-md">
       <header className="flex h-12 shrink-0 items-center justify-between border-b border-white/5 px-4">
         <h1 className="font-medium">{serverName || "Server Name"}</h1>
       </header>
 
-      <div className="scroller grid h-full grid-cols-1 place-content-start gap-1 overflow-x-auto p-2 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="scroller bg-background/80 grid h-full min-h-96 grid-cols-1 place-content-start gap-1 overflow-x-auto p-2 sm:grid-cols-2 lg:grid-cols-4">
         {filteredPlayers.map((player) => (
           <PlayerCard key={player.id} {...player} />
         ))}
@@ -39,7 +39,7 @@ const PlayerList = ({
         </div>
 
         {/* Please don't remove this, it's a way to support the this project and future once, however if really really want to remove it, feel free to do so */}
-        <span className="text-zinc-800">5AM Resources</span>
+        <span className="text-zinc-600">5AM Resources</span>
       </footer>
     </div>
   );

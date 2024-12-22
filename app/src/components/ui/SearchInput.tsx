@@ -33,8 +33,8 @@ const SearchInput = ({ onChange }: SearchInputProps) => {
   return (
     <div
       className={cn(
-        "flex items-center rounded-sm bg-white/5 transition-all duration-300 hover:bg-zinc-950",
-        isExpanded && "rounded-sm bg-zinc-950",
+        "flex items-center rounded-sm bg-white/5 transition-all duration-300 hover:bg-white/10 focus-within:bg-white/10",
+        isExpanded && "rounded-sm ring-1 ring-white/10",
       )}
     >
       <FaSearch className="block size-6 p-1.5" onClick={handleFocus} />

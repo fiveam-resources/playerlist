@@ -4,12 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --color-background-muted: #5f5f63;
-  --color-background: #09090b;
+@layer base {
+  ::-webkit-scrollbar {
+    @apply w-3;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full border-4 border-solid border-background bg-muted;
+  }
 }
 
-.scroller {
-  scrollbar-color: var(--color-background-muted) var(--color-background);
-  scrollbar-width: thin;
+
+.text-xxs {
+  font-size: 0.625rem; /* 10px */
+  line-height: 0.875rem; /* 14px */
 }

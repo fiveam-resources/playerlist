@@ -4,20 +4,38 @@ local function openUI(players)
         action = 'open',
         data = { players = players, key = Config.Key, serverName = Config.ServerName }
     })
+
+    if Config.EnableScreenblur then
+        TriggerScreenblurFadeIn(0)
+    end
+
+    if Config.EnableSound then
+        PlaySoundFrontend(-1, 'NAV', 'HUD_AMMO_SHOP_SOUNDSET', false)
+    end
 end
 
 local function closeUI()
     SetNuiFocus(false, false)
     SendNUIMessage({ action = 'close' })
+
+    if Config.EnableScreenblur then
+        TriggerScreenblurFadeOut(0)
+    end
+
+    if Config.EnableSound then
+        PlaySoundFrontend(-1, 'NAV', 'HUD_AMMO_SHOP_SOUNDSET', false)
+    end
 end
 
 -- Commands
 
-RegisterCommand('playerlist', function()
+local cmdName = 'playerlist-' .. Config.Key:lower()
+
+RegisterCommand(cmdName, function()
     TriggerServerEvent('playerlist:server:open')
 end, false)
 
-RegisterKeyMapping('playerlist', 'Open Playerlist', 'keyboard', Config.Key)
+RegisterKeyMapping(cmdName, 'Open Playerlist', 'keyboard', Config.Key)
 
 -- Events
 

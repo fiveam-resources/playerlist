@@ -9,13 +9,15 @@ local function getFramework()
 end
 
 local function getPlayerName(playerId)
-    local framework = getFramework()
+    if Config.UseCharacterName then
+        local framework = getFramework()
 
-    if framework == 'esx' then
-        local esx = exports['es_extended']:getSharedObject()
-        return esx.GetPlayerFromId(playerId).getName()
-    elseif framework == 'qb' then
-        return GetPlayerName(source)
+        if framework == 'esx' then
+            local esx = exports['es_extended']:getSharedObject()
+            return esx.GetPlayerFromId(playerId).getName()
+        elseif framework == 'qb' then
+            return GetPlayerName(source)
+        end
     end
 
     return GetPlayerName(playerId)

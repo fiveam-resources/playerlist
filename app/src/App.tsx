@@ -4,8 +4,14 @@ import { useEventListener } from "usehooks-ts";
 import { fetchNui } from "./lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 
+// const mockPlayers = Array.from({ length: 100 }, (_, index) => ({
+//   id: index + 1,
+//   name: `Player ${index + 1}`,
+//   ping: Math.floor(Math.random() * 100),
+// }));
+
 const App = () => {
-  const [display, setDisplay] = useState(true);
+  const [display, setDisplay] = useState(false);
   const [players, setPlayers] = useState();
   const [closeKey, setCloseKey] = useState();
   const [serverName, setServerName] = useState();

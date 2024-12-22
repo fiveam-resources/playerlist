@@ -21,19 +21,16 @@ const PlayerPing = ({ ping }: { ping: number }) => {
           <TooltipTrigger tabIndex={-1}>
             <FaWifi
               className={cn("rotate-45", {
-                "fill-red-700": connectionStatus === "bad",
-                "fill-emerald-700": connectionStatus === "good",
+                "fill-red-500": connectionStatus === "bad",
+                "fill-emerald-500": connectionStatus === "good",
               })}
             />
           </TooltipTrigger>
-          
-          <TooltipContent
-            className={cn({
-              "bg-red-800": connectionStatus === "bad",
-              "bg-emerald-800": connectionStatus === "good",
-            })}
-          >
-            <p>{ping} ms</p>
+
+          <TooltipContent>
+            <p className="text-xs font-semibold">
+              {ping} <span className="text-xxs font-light">MS</span>
+            </p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
