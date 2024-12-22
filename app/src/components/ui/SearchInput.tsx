@@ -33,7 +33,7 @@ const SearchInput = ({ onChange }: SearchInputProps) => {
   return (
     <div
       className={cn(
-        "flex items-center rounded-sm bg-white/5 transition-all duration-300 hover:bg-white/10 focus-within:bg-white/10",
+        "flex items-center rounded-sm transition-all duration-300 hover:bg-muted",
         isExpanded && "rounded-sm ring-1 ring-white/10",
       )}
     >

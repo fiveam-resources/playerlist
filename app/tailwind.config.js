@@ -4,10 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#7285cf",
-        background: "#11131c",
-        muted: "#1c202e",
-        tooltip: "#2a3042",
+        background: "#151618",
+        muted: "#212224",
+        tooltip: "#313236",
       },
     },
   },

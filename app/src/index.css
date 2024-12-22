@@ -14,10 +14,9 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full border-4 border-solid border-background bg-muted;
+    @apply rounded-full border-4 border-solid border-background bg-white/30;
   }
 }
-
 
 .text-xxs {
   font-size: 0.625rem; /* 10px */

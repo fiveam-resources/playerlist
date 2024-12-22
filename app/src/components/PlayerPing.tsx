@@ -1,18 +1,13 @@
 import { FaWifi } from "react-icons/fa";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/Tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/Tooltip";
 import { cn } from "../lib/utils";
 
 const getConnectionStatus = (ms: number, threshold: number) => {
   return ms < threshold ? "good" : "bad";
 };
 
-const PlayerPing = ({ ping }: { ping: number }) => {
-  const connectionStatus = getConnectionStatus(ping, 90);
+const PlayerPing = ({ ping, threshold }: { ping: number; threshold: number }) => {
+  const connectionStatus = getConnectionStatus(ping, threshold);
 
   return (
     <div className="mt-1 flex">
@@ -28,9 +23,8 @@ const PlayerPing = ({ ping }: { ping: number }) => {
           </TooltipTrigger>
 
           <TooltipContent>
-            <p className="text-xs font-semibold">
-              {ping} <span className="text-xxs font-light">MS</span>
-            </p>
+            <span className="text-xs font-semibold">{ping}</span>
+            <span className="text-xs"> ms</span>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
