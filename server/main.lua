@@ -30,7 +30,7 @@ local function getPlayers()
         table.insert(players, {
             id = playerId,
             name = getPlayerName(playerId),
-            ping = GetPlayerPing(playerId)
+            ping = GetPlayerPing(playerId),
         })
     end
 

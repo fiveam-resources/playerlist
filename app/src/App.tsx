@@ -1,14 +1,9 @@
 import { useState } from "react";
-import PlayerList from "./components/PlayerList";
 import { useEventListener } from "usehooks-ts";
 import { fetchNui } from "./lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-
-// const mockPlayers = Array.from({ length: 100 }, (_, index) => ({
-//   id: index + 1,
-//   name: `Player ${index + 1}`,
-//   ping: Math.floor(Math.random() * 100),
-// }));
+import PlayerList from "./components/PlayerList";
+// import mockPlayers from "./lib/mock";
 
 const App = () => {
   const [display, setDisplay] = useState(false);

@@ -6,7 +6,7 @@ export default {
       colors: {
         background: "#151618",
         muted: "#212224",
-        tooltip: "#313236",
+        tooltip: "#0f1012",
       },
     },
   },
