@@ -6,11 +6,7 @@ import { RiShieldFlashFill } from "react-icons/ri";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/Tooltip";
 import { MemberType } from "../lib/types";
 
-interface MemberBadgeProps {
-  type: MemberType;
-}
-
-const MemberBadge = ({ type }: MemberBadgeProps) => {
+const MemberBadge = ({ type }: { type?: MemberType }) => {
   const badge = {
     owner: {
       label: "Server Owner",
@@ -37,6 +33,8 @@ const MemberBadge = ({ type }: MemberBadgeProps) => {
       icon: <PiShootingStarFill className="fill-pink-500" />,
     },
   };
+
+  if (!type) return null;
 
   return (
     <TooltipProvider delayDuration={100}>

@@ -1,22 +1,14 @@
-local function getFramework()
-    if GetResourceState('es_extended') == 'started' then
-        return 'esx'
-    elseif GetResourceState('qb-core') == 'started' then
-        return 'qb'
-    end
-
-    return nil
-end
-
 local function getPlayerName(playerId)
     if Config.UseCharacterName then
-        local framework = getFramework()
-
-        if framework == 'esx' then
+        if GetResourceState('es_extended') == 'started' then
             local esx = exports['es_extended']:getSharedObject()
-            return esx.GetPlayerFromId(playerId).getName()
-        elseif framework == 'qb' then
-            return GetPlayerName(source)
+            local playerData = esx.GetPlayerFromId(playerId)
+            return playerData.getName()
+        end
+
+        if GetResourceState('qb-core') == 'started' then
+            local qb = exports['qb-core']:GetCoreObject()
+            -- TODO: QB-Core support
         end
     end
 

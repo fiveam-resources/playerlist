@@ -8,6 +8,8 @@ import PlayerList from "./components/PlayerList";
 const App = () => {
   const [display, setDisplay] = useState(false);
   const [players, setPlayers] = useState();
+
+  // config options
   const [closeKey, setCloseKey] = useState();
   const [serverName, setServerName] = useState();
 
@@ -27,13 +29,21 @@ const App = () => {
   });
 
   useEventListener("keydown", ({ code }: KeyboardEvent) => {
-    if (display && ["Escape", closeKey].includes(code)) fetchNui("close");
+    if (display && ["Escape", closeKey].includes(code)) {
+      fetchNui("close");
+    }
   });
 
   return (
     <AnimatePresence>
       {display && (
-        <div className="font-poppins flex h-screen select-none justify-center overflow-hidden px-2 text-white">
+        <motion.div
+          className="font-poppins flex h-screen select-none justify-center overflow-hidden px-2 text-white"
+          initial={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          animate={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          exit={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        >
           <motion.div
             className="flex h-fit w-full justify-center"
             initial={{ y: "-100%" }}
@@ -43,7 +53,7 @@ const App = () => {
           >
             <PlayerList players={players} serverName={serverName} />
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
