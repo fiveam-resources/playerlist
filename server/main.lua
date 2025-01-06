@@ -18,7 +18,7 @@ local function getPlayerDiscordRoles(userId)
     local p = promise.new()
 
     -- https://discord.com/developers/docs/resources/guild#get-guild-member
-    local url = ('https://discord.com/api/v8/guilds/%s/members/%s'):format(Config.Discord.GuildId, userId)
+    local url = ('https://discord.com/api/v8/guilds/%s/members/%s'):format(Discord.GuildId, userId)
 
     PerformHttpRequest(url, function(_, body)
         if body then
@@ -29,7 +29,7 @@ local function getPlayerDiscordRoles(userId)
         end
     end, 'GET', '', {
         ['Content-Type'] = 'application/json',
-        ['Authorization'] = ('Bot %s'):format(Config.Discord.Token)
+        ['Authorization'] = ('Bot %s'):format(Discord.Token)
     })
 
     return Citizen.Await(p)
@@ -46,10 +46,10 @@ local function getPlayerMemberBadgeType(playerId)
             local playerRoles = getPlayerDiscordRoles(playerDiscordId)
 
             for _, roleId in ipairs(playerRoles) do
-                if roleId == Config.Discord.Roles['owner'] then
+                if roleId == Discord.Roles['owner'] then
                     badgeType = 'owner'
                     break
-                elseif roleId == Config.Discord.Roles['moderator'] then
+                elseif roleId == Discord.Roles['moderator'] then
                     badgeType = 'moderator'
                     break
                 end
@@ -60,34 +60,47 @@ local function getPlayerMemberBadgeType(playerId)
     return badgeType
 end
 
-------------------------------------------------------------------------------
+local function addPlayer(playerId)
+    table.insert(players, {
+        id = tonumber(playerId),
+        name = getPlayerName(playerId),
+        ping = GetPlayerPing(playerId),
+        memberType = getPlayerMemberBadgeType(playerId),
+    })
+end
 
-local function OnResourceStart()
-    for _, playerId in ipairs(GetPlayers()) do
-        table.insert(players, {
-            id = playerId,
-            name = getPlayerName(playerId),
-            ping = GetPlayerPing(playerId),
-            memberType = getPlayerMemberBadgeType(playerId),
-        })
-
-        print(('Player %s has joined the server'):format(getPlayerName(playerId)))
+local function removePlayer(playerId)
+    for i, player in ipairs(players) do
+        if player.id == playerId then
+            table.remove(players, i)
+            break
+        end
     end
 end
 
--- local function OnPlayerJoining()
---     local playerId = source
+------------------------------------------------------------------------------
 
---     table.insert(players, {
---         id = playerId,
---         name = getPlayerName(playerId),
---         ping = GetPlayerPing(playerId),
---         memberType = getPlayerMemberBadgeType(playerId),
---     })
--- end
+AddEventHandler("onServerResourceStart", function()
+    for _, playerId in ipairs(GetPlayers()) do
+        addPlayer(playerId)
+    end
+end)
 
-AddEventHandler("onServerResourceStart", OnResourceStart)
--- AddEventHandler("playerJoining", OnPlayerJoining)
+if GetResourceState('es_extended') == 'started' then
+    AddEventHandler("esx:playerLoaded", function(playerId)
+        addPlayer(playerId)
+    end)
+else
+    AddEventHandler("playerJoining", function()
+        local playerId = source
+        addPlayer(playerId)
+    end)
+end
+
+AddEventHandler("playerDropped", function()
+    local playerId = source
+    removePlayer(playerId)
+end)
 
 ------------------------------------------------------------------------------
 
