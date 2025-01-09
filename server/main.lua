@@ -49,6 +49,9 @@ local function getPlayerMemberBadgeType(playerId)
                 if roleId == Discord.Roles['owner'] then
                     badgeType = 'owner'
                     break
+                elseif roleId == Discord.Roles['admin'] then
+                    badgeType = 'admin'
+                    break
                 elseif roleId == Discord.Roles['moderator'] then
                     badgeType = 'moderator'
                     break

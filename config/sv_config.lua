@@ -7,5 +7,6 @@ Discord.Token = ""
 
 Discord.Roles = {
     ['owner'] = '',
+    ['admin'] = '',
     ['moderator'] = ''
 }
